@@ -4,11 +4,17 @@
   <meta charset="UTF-8">
   <title>Portal Evaluasi Kinerja Toko - NICESO</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Icon Browser (Favicon) -->
+  <link rel="icon" type="image/webp" href="./Penilaian%20Barat%203%20Badge.webp">
+  <link rel="shortcut icon" type="image/webp" href="./Penilaian%20Barat%203%20Badge.webp">
+  <link rel="apple-touch-icon" href="./Penilaian%20Barat%203%20Badge.webp">
+  <meta name="theme-color" content="#0f172a">
   
-  <!-- Fonts: Inter -->
+  <!-- Fonts: Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
   <!-- Bootstrap 5 & Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -16,23 +22,30 @@
 
   <style>
     :root {
-      /* Palette Warna Merah Khas NICESO */
-      --niceso-red: #e11d48;
-      --niceso-red-dark: #be123c;
-      --niceso-red-light: #fff1f2;
-      --niceso-red-border: #fecdd3;
+      /* Palette Warna Tema Stock Opname NICESO */
+      --niceso-red: #c00000;
+      --niceso-dark-red: #990000;
+      --niceso-red-light: #fef2f2;
+      --niceso-red-border: #fecaca;
+      --slate-900: #0f172a;
+      --slate-800: #1e293b;
       --surface: #ffffff;
       --bg: #f8fafc;
-      --border: #e2e8f0;
+      --border: #e5e7eb;
       --text-main: #0f172a;
       --text-secondary: #475569;
       --text-muted: #94a3b8;
-      --ring: rgba(225, 29, 72, 0.18);
+      --success: #0e9f6e;
+      --ring: rgba(192, 0, 0, 0.16);
     }
 
     * {
       box-sizing: border-box;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
@@ -42,15 +55,20 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Top Navigation */
+    /* Ruang bawah agar konten tidak tertutup bubble nav */
+    main.container {
+      padding-bottom: 110px !important;
+    }
+
+    /* Top Navigation (Slate-900 + Aksen Merah NICESO) */
     .top-navbar {
-      background: rgba(255, 255, 255, 0.98);
-      backdrop-filter: blur(10px);
-      border-bottom: 2px solid var(--niceso-red);
+      background: linear-gradient(135deg, var(--slate-900), var(--slate-800));
+      border-bottom: 3px solid var(--niceso-red);
       position: sticky;
       top: 0;
       z-index: 1000;
       padding: 12px 0;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.18);
     }
 
     .brand-logo {
@@ -60,28 +78,54 @@
       width: 40px;
       height: 40px;
       border-radius: 10px;
-      background: linear-gradient(135deg, var(--niceso-red), var(--niceso-red-dark));
+      background: linear-gradient(135deg, var(--niceso-red), var(--niceso-dark-red));
       color: #ffffff;
       font-weight: 800;
       font-size: 1.15rem;
       letter-spacing: -0.5px;
-      box-shadow: 0 4px 12px rgba(225, 29, 72, 0.3);
+      box-shadow: 0 4px 12px rgba(192, 0, 0, 0.35);
+      overflow: hidden;
+    }
+
+    .brand-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .brand-text h1 {
       font-size: 0.98rem;
       font-weight: 800;
       margin: 0;
-      color: var(--niceso-red-dark);
+      color: #ffffff;
       letter-spacing: -0.2px;
     }
 
     .brand-text span {
       font-size: 0.72rem;
       font-weight: 600;
-      color: var(--text-muted);
+      color: #cbd5e1;
       text-transform: uppercase;
       letter-spacing: 0.5px;
+    }
+
+    .user-pill-dark {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: #f8fafc;
+    }
+
+    .btn-logout-dark {
+      background: rgba(192, 0, 0, 0.18);
+      border: 1px solid rgba(248, 113, 113, 0.45);
+      color: #fecaca;
+      transition: all 0.2s ease;
+    }
+
+    .btn-logout-dark:hover {
+      background: var(--niceso-red);
+      border-color: var(--niceso-red);
+      color: #ffffff;
     }
 
     /* Main Container Card */
@@ -89,13 +133,13 @@
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 16px;
-      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03), 0 10px 30px rgba(15, 23, 42, 0.04);
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 10px 28px rgba(15, 23, 42, 0.05);
       overflow: hidden;
     }
 
     .card-header-custom {
-      padding: 22px 28px;
-      background: #ffffff;
+      padding: 20px 26px;
+      background: var(--surface);
       border-bottom: 1px solid var(--border);
       display: flex;
       flex-wrap: wrap;
@@ -104,41 +148,51 @@
       gap: 12px;
     }
 
+    .card-title-niceso {
+      color: var(--slate-900);
+      font-weight: 800;
+      letter-spacing: -0.3px;
+    }
+
     .card-body-custom {
-      padding: 28px;
+      padding: 24px 26px;
     }
 
     /* Section Headers */
     .metric-section {
-      margin-bottom: 24px;
-      background: #ffffff;
+      margin-bottom: 22px;
+      background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 20px 22px;
-      transition: all 0.2s ease;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      scroll-margin-top: 86px;
     }
 
     .metric-section:hover {
-      border-color: var(--niceso-red-border);
+      border-color: #cbd5e1;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
     }
 
     .section-title {
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       font-weight: 700;
       color: var(--niceso-red);
       text-transform: uppercase;
-      letter-spacing: 0.8px;
+      letter-spacing: 0.7px;
       display: flex;
       align-items: center;
       gap: 8px;
       margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed var(--border);
     }
 
     /* Form Fields */
     .form-label-pro {
       font-size: 0.82rem;
       font-weight: 600;
-      color: var(--text-secondary);
+      color: var(--slate-800);
       margin-bottom: 6px;
       display: flex;
       align-items: center;
@@ -173,10 +227,10 @@
     .rating-btn {
       border: 1px solid #cbd5e1;
       background: #f8fafc;
-      color: #334155;
-      font-size: 0.88rem;
+      color: var(--slate-800);
+      font-size: 0.86rem;
       font-weight: 600;
-      padding: 8px 4px;
+      padding: 9px 4px;
       border-radius: 8px;
       cursor: pointer;
       text-align: center;
@@ -191,19 +245,20 @@
     }
 
     .rating-btn.active {
-      background: var(--niceso-red);
-      border-color: var(--niceso-red);
+      background: linear-gradient(135deg, var(--niceso-red), var(--niceso-dark-red));
+      border-color: var(--niceso-dark-red);
       color: #ffffff;
-      box-shadow: 0 2px 8px rgba(225, 29, 72, 0.35);
+      box-shadow: 0 3px 10px rgba(192, 0, 0, 0.3);
     }
 
     /* Filter Panel */
     .filter-panel {
-      background: #fff7f7;
+      background: #f1f5f9;
       border-radius: 12px;
       padding: 16px 20px;
       margin-bottom: 24px;
-      border: 1px solid var(--niceso-red-border);
+      border: 1px solid var(--border);
+      scroll-margin-top: 86px;
     }
 
     /* Store Info Capsule */
@@ -211,18 +266,22 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: var(--niceso-red-light);
-      border: 1px solid var(--niceso-red-border);
+      background: var(--slate-900);
+      border: 1px solid var(--slate-800);
       padding: 6px 14px;
       border-radius: 20px;
-      color: var(--niceso-red-dark);
-      font-size: 0.85rem;
+      color: #ffffff;
+      font-size: 0.84rem;
       font-weight: 700;
+    }
+
+    .store-badge-capsule i {
+      color: #f87171;
     }
 
     /* Buttons */
     .btn-submit-pro {
-      background: linear-gradient(135deg, var(--niceso-red), var(--niceso-red-dark));
+      background: linear-gradient(135deg, var(--niceso-red), var(--niceso-dark-red));
       border: none;
       color: #ffffff;
       font-weight: 600;
@@ -232,12 +291,13 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      box-shadow: 0 4px 14px rgba(225, 29, 72, 0.28);
+      box-shadow: 0 4px 14px rgba(192, 0, 0, 0.28);
       transition: all 0.2s ease;
     }
 
     .btn-submit-pro:hover {
-      box-shadow: 0 6px 20px rgba(225, 29, 72, 0.4);
+      background: linear-gradient(135deg, var(--niceso-dark-red), #7f1d1d);
+      box-shadow: 0 6px 18px rgba(192, 0, 0, 0.38);
       transform: translateY(-1px);
       color: #ffffff;
     }
@@ -248,36 +308,118 @@
       box-shadow: none;
     }
 
+    .form-check-input:checked {
+      background-color: var(--niceso-red);
+      border-color: var(--niceso-red);
+    }
+
     /* Login View */
     .login-wrapper {
       max-width: 440px;
-      margin: 70px auto;
+      margin: 64px auto;
     }
 
     .login-icon-box {
       width: 64px;
       height: 64px;
-      border-radius: 18px;
-      background: linear-gradient(135deg, var(--niceso-red-light), #ffe4e6);
-      color: var(--niceso-red);
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--slate-900), var(--slate-800));
+      color: #ffffff;
+      border-bottom: 3px solid var(--niceso-red);
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.8rem;
-      margin-bottom: 20px;
-      box-shadow: 0 8px 20px rgba(225, 29, 72, 0.12);
+      font-size: 1.7rem;
+      margin-bottom: 18px;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.16);
     }
 
     /* Auto Login Overlay Loading */
     #autoLoginOverlay {
       position: fixed;
       inset: 0;
-      background: #ffffff;
+      background: var(--slate-900);
       z-index: 2000;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+    }
+
+    .spinner-niceso {
+      color: var(--niceso-red);
+    }
+
+    /* ================= FLOATING BOTTOM BUBBLE NAV ================= */
+    .bubble-nav-wrapper {
+      position: fixed;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1050;
+      width: max-content;
+      max-width: calc(100vw - 24px);
+    }
+
+    .bubble-nav {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 6px 8px;
+      background: rgba(15, 23, 42, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 999px;
+      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.35), 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .bubble-btn {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      border: none;
+      background: transparent;
+      color: #cbd5e1;
+      padding: 7px 13px;
+      border-radius: 999px;
+      font-size: 0.68rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+
+    .bubble-btn i {
+      font-size: 1.05rem;
+      line-height: 1;
+    }
+
+    .bubble-btn:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .bubble-btn.active {
+      background: linear-gradient(135deg, var(--niceso-red), var(--niceso-dark-red));
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(192, 0, 0, 0.45);
+    }
+
+    @media (max-width: 576px) {
+      .card-body-custom {
+        padding: 18px 16px;
+      }
+      .bubble-btn {
+        padding: 7px 10px;
+        font-size: 0.64rem;
+      }
+      .bubble-btn i {
+        font-size: 1rem;
+      }
     }
   </style>
 </head>
@@ -285,28 +427,32 @@
 
   <!-- OVERLAY DETEKSI AUTO-LOGIN -->
   <div id="autoLoginOverlay">
-    <div class="brand-logo mb-3" style="width: 52px; height: 52px; font-size: 1.5rem;">N</div>
-    <div class="spinner-border text-danger mb-2" role="status" style="width: 2.2rem; height: 2.2rem;"></div>
-    <div class="text-secondary small fw-semibold" id="autoLoginMsg">Menyiapkan dashboard...</div>
+    <div class="brand-logo mb-3" style="width: 52px; height: 52px; font-size: 1.5rem;">
+      <img src="./Penilaian%20Barat%203%20Badge.webp" alt="NICESO" onerror="this.remove(); this.parentElement.textContent='N';">
+    </div>
+    <div class="spinner-border spinner-niceso mb-2" role="status" style="width: 2.2rem; height: 2.2rem;"></div>
+    <div class="text-light small fw-semibold opacity-75" id="autoLoginMsg">Menyiapkan dashboard...</div>
   </div>
 
   <!-- TOPBAR -->
   <header class="top-navbar">
     <div class="container d-flex justify-content-between align-items-center">
       <div class="d-flex align-items-center gap-3">
-        <div class="brand-logo">N</div>
+        <div class="brand-logo">
+          <img src="./Penilaian%20Barat%203%20Badge.webp" alt="NICESO" onerror="this.remove(); this.parentElement.textContent='N';">
+        </div>
         <div class="brand-text">
           <h1>NICESO INDONESIA</h1>
           <span>Portal Monitoring & Evaluasi Toko • Barat 3</span>
         </div>
       </div>
       
-      <div id="userPanel" class="d-none align-items-center gap-3">
-        <div class="d-flex align-items-center gap-2 bg-light px-3 py-1 rounded-pill border">
-          <i class="bi bi-person-fill-check text-danger"></i>
-          <span id="displaySpvName" class="fw-semibold small text-dark">Supervisor</span>
+      <div id="userPanel" class="d-none align-items-center gap-2 gap-md-3">
+        <div class="d-flex align-items-center gap-2 px-3 py-1 rounded-pill user-pill-dark">
+          <i class="bi bi-person-fill-check" style="color: #f87171;"></i>
+          <span id="displaySpvName" class="fw-semibold small">Supervisor</span>
         </div>
-        <button class="btn btn-outline-danger btn-sm rounded-pill px-3 fw-semibold" onclick="logout()">
+        <button class="btn btn-sm rounded-pill px-3 fw-semibold btn-logout-dark" onclick="logout()">
           <i class="bi bi-box-arrow-right me-1"></i>Keluar
         </button>
       </div>
@@ -322,7 +468,7 @@
           <div class="login-icon-box">
             <i class="bi bi-shield-lock-fill"></i>
           </div>
-          <h4 class="fw-bold mb-1">Akses Supervisor</h4>
+          <h4 class="fw-bold mb-1" style="color: var(--slate-900);">Akses Supervisor</h4>
           <p class="text-muted small mb-4">Masuk untuk mengisi lembar evaluasi bulanan toko binaan</p>
         </div>
 
@@ -367,7 +513,7 @@
         
         <div class="card-header-custom">
           <div>
-            <h5 class="fw-bold mb-0 text-danger">Formulir Evaluasi Kinerja Bulanan</h5>
+            <h5 class="card-title-niceso mb-0">Formulir Evaluasi Kinerja Bulanan</h5>
             <small class="text-muted">Isian data operasional toko binaan sesuai periode evaluasi</small>
           </div>
           <div id="statusStorePill" class="d-none">
@@ -381,11 +527,11 @@
         <div class="card-body-custom">
           
           <!-- Filter Periode & Pemilihan Toko -->
-          <div class="filter-panel">
+          <div id="secFilter" class="filter-panel">
             <div class="row g-3 align-items-center">
               <div class="col-md-6">
                 <label class="form-label-pro">
-                  <span><i class="bi bi-calendar3 me-1 text-danger"></i> Periode Penilaian</span>
+                  <span><i class="bi bi-calendar3 me-1" style="color: var(--niceso-red);"></i> Periode Penilaian</span>
                 </label>
                 <select id="selectPeriode" class="form-select-pro" onchange="renderStoreList()">
                   <option value="" disabled selected>Pilih Periode</option>
@@ -393,7 +539,7 @@
               </div>
               <div class="col-md-6">
                 <label class="form-label-pro">
-                  <span><i class="bi bi-geo-alt me-1 text-danger"></i> Pilih Toko Binaan</span>
+                  <span><i class="bi bi-geo-alt me-1" style="color: var(--niceso-red);"></i> Pilih Toko Binaan</span>
                 </label>
                 <select id="selectToko" class="form-select-pro" onchange="loadStoreDetail()">
                   <option value="" disabled selected>Pilih periode terlebih dahulu</option>
@@ -409,7 +555,7 @@
             <input type="hidden" id="formKodeToko">
 
             <!-- SEKSI 1: KEHADIRAN (Kolom E - F) -->
-            <div class="metric-section">
+            <div id="secKehadiran" class="metric-section">
               <div class="section-title">
                 <i class="bi bi-people-fill"></i> 1. Kedisiplinan & Kehadiran Karyawan (Kolom E - F)
               </div>
@@ -426,7 +572,7 @@
             </div>
 
             <!-- SEKSI 2: KELUHAN & KEPUASAN (Kolom G - I) -->
-            <div class="metric-section">
+            <div id="secKeluhan" class="metric-section">
               <div class="section-title">
                 <i class="bi bi-chat-heart-fill"></i> 2. Kepuasan & Keluhan Pelanggan (Kolom G - I)
               </div>
@@ -454,7 +600,7 @@
             </div>
 
             <!-- SEKSI 3: DISPLAY & FISIK TOKO (Kolom J - N) -->
-            <div class="metric-section">
+            <div id="secDisplay" class="metric-section">
               <div class="section-title">
                 <i class="bi bi-stars"></i> 3. Evaluasi Foto Display & Fisik Toko (Kolom J - N)
               </div>
@@ -527,7 +673,7 @@
             </div>
 
             <!-- SEKSI 4: CATATAN (Kolom O) -->
-            <div class="metric-section">
+            <div id="secCatatan" class="metric-section">
               <div class="section-title">
                 <i class="bi bi-card-text"></i> 4. Catatan Khusus & Rekomendasi (Kolom O)
               </div>
@@ -556,15 +702,39 @@
 
   </main>
 
+  <!-- FLOATING BUBBLE NAVIGASI BAWAH (TETAP ADA SAAT DIGULIR) -->
+  <nav id="floatingBubbleNav" class="bubble-nav-wrapper d-none" aria-label="Navigasi Cepat Formulir">
+    <div class="bubble-nav">
+      <button type="button" class="bubble-btn active" data-target="secFilter" onclick="scrollToSection('secFilter', this)">
+        <i class="bi bi-shop"></i>
+        <span>Toko</span>
+      </button>
+      <button type="button" class="bubble-btn" data-target="secKehadiran" onclick="scrollToSection('secKehadiran', this)">
+        <i class="bi bi-people-fill"></i>
+        <span>Absen</span>
+      </button>
+      <button type="button" class="bubble-btn" data-target="secKeluhan" onclick="scrollToSection('secKeluhan', this)">
+        <i class="bi bi-chat-heart-fill"></i>
+        <span>Keluhan</span>
+      </button>
+      <button type="button" class="bubble-btn" data-target="secDisplay" onclick="scrollToSection('secDisplay', this)">
+        <i class="bi bi-stars"></i>
+        <span>Display</span>
+      </button>
+      <button type="button" class="bubble-btn" data-target="secCatatan" onclick="scrollToSection('secCatatan', this)">
+        <i class="bi bi-send-check-fill"></i>
+        <span>Kirim</span>
+      </button>
+    </div>
+  </nav>
+
   <script>
-    // GANTI DENGAN URL WEB APP GOOGLE APPS SCRIPT ANDA
     const API_URL = 'https://script.google.com/macros/s/AKfycbwjwUA23sjFPyGrZ9PJCBw-VdXzXIb1PXcjVXalKgxXa5mJTazW2vs1EKSHk4H-9EsI/exec';
 
     const STORAGE_KEY = 'NICESO_SPV_AUTH';
     let loggedInSpv = '';
     let appDataCache = {};
 
-    // Helper pemanggil API Apps Script (pengganti google.script.run)
     async function callApi(action, payload = {}) {
       const response = await fetch(API_URL, {
         method: 'POST',
@@ -581,7 +751,6 @@
     }
 
     document.addEventListener('DOMContentLoaded', function() {
-      // Inisialisasi Rating Selector
       document.querySelectorAll('.rating-group').forEach(group => {
         const targetId = group.getAttribute('data-target');
         group.querySelectorAll('.rating-btn').forEach(btn => {
@@ -593,9 +762,47 @@
         });
       });
 
-      // Cek Sesi Auto-Login
+      // Sinkronkan status aktif bubble nav saat halaman digulir
+      window.addEventListener('scroll', updateActiveBubbleOnScroll, { passive: true });
+
       checkAutoLogin();
     });
+
+    function scrollToSection(sectionId, btnEl) {
+      const target = document.getElementById(sectionId);
+      if (!target || target.offsetParent === null) {
+        // Jika form belum terbuka (toko belum dipilih), arahkan ke filter
+        const filterEl = document.getElementById('secFilter');
+        if (filterEl) filterEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return;
+      }
+
+      document.querySelectorAll('#floatingBubbleNav .bubble-btn').forEach(b => b.classList.remove('active'));
+      if (btnEl) btnEl.classList.add('active');
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function updateActiveBubbleOnScroll() {
+      const nav = document.getElementById('floatingBubbleNav');
+      if (nav.classList.contains('d-none')) return;
+
+      const sectionIds = ['secFilter', 'secKehadiran', 'secKeluhan', 'secDisplay', 'secCatatan'];
+      let currentId = 'secFilter';
+
+      sectionIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && el.offsetParent !== null) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 160) {
+            currentId = id;
+          }
+        }
+      });
+
+      document.querySelectorAll('#floatingBubbleNav .bubble-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-target') === currentId);
+      });
+    }
 
     function checkAutoLogin() {
       const savedAuth = localStorage.getItem(STORAGE_KEY);
@@ -627,6 +834,7 @@
     function showLoginForm() {
       document.getElementById('autoLoginOverlay').classList.add('d-none');
       document.getElementById('loginSection').classList.remove('d-none');
+      document.getElementById('floatingBubbleNav').classList.add('d-none');
       loadSpvDropdown();
     }
 
@@ -713,6 +921,7 @@
       document.getElementById('appSection').classList.remove('d-none');
       document.getElementById('userPanel').classList.remove('d-none');
       document.getElementById('userPanel').classList.add('d-flex');
+      document.getElementById('floatingBubbleNav').classList.remove('d-none');
       document.getElementById('displaySpvName').textContent = loggedInSpv;
       fetchStoreData();
     }
@@ -762,14 +971,12 @@
       document.getElementById('activeStoreBadge').textContent = store.kodeToko;
       document.getElementById('statusStorePill').classList.remove('d-none');
 
-      // Nilai Angka & Teks
       document.getElementById('inIzinSakitAlpa').value = store.izinSakitAlpa;
       document.getElementById('inTotalHariKerja').value = store.totalHariKerja;
       document.getElementById('inDetailKeluhan').value = store.detailKeluhan;
       document.getElementById('inJumlahKeluhan').value = store.jumlahKeluhan;
       document.getElementById('inCatatan').value = store.catatan;
 
-      // Rating Skala 1 - 5
       setRatingValue('inSkorKepuasan', store.skorKepuasan);
       setRatingValue('inPlanogram', store.planogram);
       setRatingValue('inKerapihanDisplay', store.kerapihanDisplay);
@@ -814,10 +1021,10 @@
           alertBox.classList.remove('d-none');
           
           if (res.success) {
-            alertBox.style.backgroundColor = '#fff1f2';
-            alertBox.style.color = '#9f1239';
-            alertBox.style.border = '1px solid #fecdd3';
-            alertBox.innerHTML = `<i class="bi bi-check-circle-fill me-2 fs-5 text-danger"></i> <strong>Laporan Diterima:</strong> Seluruh indikator evaluasi untuk <strong>${payload.kodeToko}</strong> telah berhasil diperbarui di sistem.`;
+            alertBox.style.backgroundColor = '#ecfdf5';
+            alertBox.style.color = '#065f46';
+            alertBox.style.border = '1px solid #a7f3d0';
+            alertBox.innerHTML = `<i class="bi bi-check-circle-fill me-2 fs-5" style="color: #0e9f6e;"></i> <strong>Laporan Diterima:</strong> Seluruh indikator evaluasi untuk <strong>${payload.kodeToko}</strong> telah berhasil diperbarui di sistem.`;
             fetchStoreData();
           } else {
             alertBox.style.backgroundColor = '#fef2f2';
@@ -844,6 +1051,7 @@
       document.getElementById('appSection').classList.add('d-none');
       document.getElementById('userPanel').classList.add('d-none');
       document.getElementById('userPanel').classList.remove('d-flex');
+      document.getElementById('floatingBubbleNav').classList.add('d-none');
       showLoginForm();
     }
   </script>
